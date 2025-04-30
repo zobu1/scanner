@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Scanner</title>
+</head>
+<body>
+    <h1>Stock Scanner</h1>
+
+    <!-- Filter Form -->
+    <form method="get">
+        {{ form.as_p }}
+        <button type="submit">Apply Filter</button>
+        <button type="reset" onclick="window.location.href='{% url 'stock_list' %}'">Reset</button>
+    </form>
+    </form>
+    <br>
+
+    <table border="1">
+        <tr>
+            <th>Ticker</th>
+            <th>Price</th>
+            <th>Volume</th>
+            <th>Actions</th>
+        </tr>
+        {% for stock in stocks %}
+        <tr>
+            <td>{{ stock.ticker }}</td>
+            <td>{{ stock.price }}</td>
+            <td>{{ stock.volume }}</td>
+            <td>
+                <a href="{% url 'stock_edit' stock.pk %}">Edit</a> |
+                <a href="{% url 'stock_delete' stock.pk %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="{% url 'stock_add' %}">Add New Stock</a>
+    <br>
+    <a href="{% url 'stock_report' %}">Go to Stock Report</a>
+</body>
+</html>

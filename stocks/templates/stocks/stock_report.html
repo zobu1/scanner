@@ -1,0 +1,59 @@
+<!-- stocks/templates/stocks/stock_report.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Report</title>
+</head>
+<body>
+    <h1>Stock Report</h1>
+    <form method="get">
+        <label for="min_return">Minimum 5-Day Cumulative Return:</label>
+        <input type="text" name="min_return" id="min_return" value="{{ request.GET.min_return }}">
+        <br>
+        <label for="min_return">Maximum 5-Day Cumulative Return:</label>
+        <input type="text" name="max_return" id="max_return" value="{{ request.GET.max_return }}">
+        <br>
+        <label for="max_return">Minimum RSI:</label>
+        <input type="text" name="min_rsi" id="min_rsi" value="{{ request.GET.min_rsi }}">
+        <br>
+        <label for="max_rsi">Maximum RSI:</label>
+        <input type="text" name="max_rsi" id="max_rsi" value="{{ request.GET.max_rsi }}">
+        <br>
+        
+        <button type="submit">Filter</button>
+    </form>
+    <br>
+    <table border="1">
+        <tr>
+            <th>Ticker</th>
+            <th>Price</th>
+            <th>Volume</th>
+            <th>5-Day Cumulative Return</th>
+            <th>RSI</th>
+        </tr>
+        {% for stock in stock_data %}
+        <tr>
+            <td>{{ stock.ticker }}</td>
+            <td>{{ stock.price }}</td>
+            <td>{{ stock.volume }}</td>
+            <td>
+                {% if stock.five_day_return %}
+                    {{ stock.five_day_return|floatformat:2 }}
+                {% else %}
+                    N/A
+                {% endif %}
+            </td>
+            <td>
+                {% if stock.rsi %}
+                    {{ stock.rsi|floatformat:2 }}
+                {% else %}
+                    N/A
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="{% url 'stock_list' %}">Back to Stock Management</a>
+</body>
+</html>

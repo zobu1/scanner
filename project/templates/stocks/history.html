@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>History for {{ stock.ticker }}</title>
+</head>
+<body>
+    <h1>Historical Data for {{ stock.ticker }}</h1>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Price</th>
+            <th>Volume</th>
+        </tr>
+        {% for record in history %}
+        <tr>
+            <td>{{ record.date }}</td>
+            <td>{{ record.price }}</td>
+            <td>{{ record.volume }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

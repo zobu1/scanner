@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% if object %}Edit{% else %}Add{% endif %} Stock</title>
+</head>
+<body>
+    <h1>{% if object %}Edit{% else %}Add{% endif %} Stock</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'stock_list' %}">Back to Stock List</a>
+</body>
+</html>
